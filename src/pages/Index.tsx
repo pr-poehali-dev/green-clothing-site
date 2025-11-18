@@ -2,175 +2,128 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ProductCard from '@/components/ProductCard';
 import Icon from '@/components/ui/icon';
-
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Классическая футболка',
-    price: 2990,
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=800&fit=crop',
-    category: 'Футболки',
-    isNew: true,
-  },
-  {
-    id: 2,
-    name: 'Худи оверсайз',
-    price: 5990,
-    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=800&fit=crop',
-    category: 'Худи',
-    isNew: true,
-  },
-  {
-    id: 3,
-    name: 'Джинсы slim fit',
-    price: 4990,
-    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=800&fit=crop',
-    category: 'Джинсы',
-  },
-  {
-    id: 4,
-    name: 'Куртка бомбер',
-    price: 8990,
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=800&fit=crop',
-    category: 'Куртки',
-  },
-];
-
-const categories = [
-  { name: 'Футболки', icon: 'Shirt', count: 45 },
-  { name: 'Худи', icon: 'ShoppingBag', count: 32 },
-  { name: 'Джинсы', icon: 'Package', count: 28 },
-  { name: 'Куртки', icon: 'Layers', count: 19 },
-];
+import { products } from '@/data/products';
 
 const Index = () => {
+  const featuredProducts = products.slice(0, 4);
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header cartItemsCount={0} />
+      <Header />
       
       <main className="flex-1">
-        <section className="relative h-[600px] flex items-center justify-center bg-gradient-to-br from-primary/10 via-accent/20 to-secondary/30">
-          <div className="container px-4 text-center">
-            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in">
-              Стиль в каждой детали
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-slide-up">
-              Откройте для себя коллекцию современной одежды, созданной для тех, кто ценит качество и комфорт
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
-              <Button asChild size="lg" className="text-base">
-                <Link to="/catalog">
-                  <Icon name="ShoppingBag" size={20} className="mr-2" />
-                  Смотреть каталог
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="text-base">
-                <Link to="/contacts">
-                  <Icon name="MessageCircle" size={20} className="mr-2" />
-                  Связаться с нами
-                </Link>
-              </Button>
+        <section className="relative bg-gradient-to-br from-primary/10 via-accent/20 to-secondary/30 py-20">
+          <div className="container">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-foreground">
+                Стильная одежда для вас
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                Откройте для себя коллекцию современной одежды в зелёных тонах. Качество, комфорт и стиль в каждой вещи.
+              </p>
+              <div className="flex gap-4 justify-center flex-wrap">
+                <Button asChild size="lg" className="text-lg px-8">
+                  <Link to="/catalog">
+                    Перейти в каталог
+                    <Icon name="ArrowRight" className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="text-lg px-8">
+                  <Link to="/contacts">Связаться с нами</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
 
         <section className="py-16 bg-background">
-          <div className="container px-4">
-            <div className="text-center mb-12">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Популярные категории
-              </h2>
-              <p className="text-muted-foreground">
-                Найдите то, что идеально подойдёт именно вам
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {categories.map((category) => (
-                <Link key={category.name} to="/catalog">
-                  <Card className="group hover:shadow-lg transition-all cursor-pointer">
-                    <CardContent className="p-6 text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <Icon name={category.icon as any} size={32} className="text-primary" />
-                      </div>
-                      <h3 className="font-heading font-semibold text-foreground mb-1">{category.name}</h3>
-                      <p className="text-sm text-muted-foreground">{category.count} товаров</p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+          <div className="container">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className="border-primary/20">
+                <CardContent className="pt-6 text-center space-y-3">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                    <Icon name="Truck" className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg">Бесплатная доставка</h3>
+                  <p className="text-sm text-muted-foreground">При заказе от 3000 рублей</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-primary/20">
+                <CardContent className="pt-6 text-center space-y-3">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                    <Icon name="RefreshCw" className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg">Легкий возврат</h3>
+                  <p className="text-sm text-muted-foreground">30 дней на возврат товара</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-primary/20">
+                <CardContent className="pt-6 text-center space-y-3">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                    <Icon name="Shield" className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg">Гарантия качества</h3>
+                  <p className="text-sm text-muted-foreground">Сертифицированные товары</p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
 
-        <section className="py-16 bg-muted/30">
-          <div className="container px-4">
-            <div className="flex items-center justify-between mb-12">
-              <div>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  Новинки
-                </h2>
-                <p className="text-muted-foreground">
-                  Только что поступили в продажу
-                </p>
-              </div>
-              <Button asChild variant="outline">
-                <Link to="/catalog">
-                  Все товары
-                  <Icon name="ArrowRight" size={16} className="ml-2" />
-                </Link>
-              </Button>
+        <section className="py-16">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Популярные товары</h2>
+              <p className="text-muted-foreground">Выбор наших покупателей</p>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredProducts.map((product) => (
-                <ProductCard key={product.id} {...product} />
+                <Card key={product.id} className="overflow-hidden group hover:shadow-lg transition-shadow">
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <CardContent className="p-4 space-y-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="font-semibold line-clamp-1">{product.name}</h3>
+                      <div className="flex items-center gap-1 text-sm">
+                        <Icon name="Star" className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <span>{product.rating}</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-primary">{product.price} ₽</span>
+                      <Button asChild size="sm">
+                        <Link to={`/product/${product.id}`}>Смотреть</Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="py-16 bg-primary/5">
-          <div className="container px-4">
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon name="Truck" size={24} className="text-primary" />
-                  </div>
-                  <h3 className="font-heading font-semibold text-foreground mb-2">Быстрая доставка</h3>
-                  <p className="text-sm text-muted-foreground">Доставим в течение 1-3 дней по всей России</p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon name="Shield" size={24} className="text-primary" />
-                  </div>
-                  <h3 className="font-heading font-semibold text-foreground mb-2">Гарантия качества</h3>
-                  <p className="text-sm text-muted-foreground">30 дней на возврат без лишних вопросов</p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon name="CreditCard" size={24} className="text-primary" />
-                  </div>
-                  <h3 className="font-heading font-semibold text-foreground mb-2">Безопасная оплата</h3>
-                  <p className="text-sm text-muted-foreground">Принимаем все популярные способы оплаты</p>
-                </CardContent>
-              </Card>
+            
+            <div className="text-center mt-10">
+              <Button asChild variant="outline" size="lg">
+                <Link to="/catalog">Смотреть весь каталог</Link>
+              </Button>
             </div>
           </div>
         </section>
       </main>
 
-      <Footer />
+      <footer className="bg-muted py-8 mt-auto">
+        <div className="container text-center text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} GreenStyle. Все права защищены.</p>
+        </div>
+      </footer>
     </div>
   );
 };
