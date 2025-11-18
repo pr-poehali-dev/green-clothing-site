@@ -4,12 +4,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { useCartStore } from '@/store/cartStore';
 
-interface HeaderProps {
-  cartItemsCount?: number;
-}
-
-const Header = ({ cartItemsCount = 0 }: HeaderProps) => {
+const Header = () => {
+  const items = useCartStore((state) => state.items);
+  const cartItemsCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
