@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
-import { useCartStore } from '@/store/cartStore';
+import { useCartStore } from '@/lib/cart';
 
 const Header = () => {
   const items = useCartStore((state) => state.items);
